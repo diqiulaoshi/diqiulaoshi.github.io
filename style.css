@@ -47,7 +47,6 @@ body{
     margin:0 auto;
     flex:1;
     padding-bottom: 80px;
-    padding-top:200px;
 }
 .hexin{
     position:absolute;
@@ -102,17 +101,20 @@ body{
     padding: 10px 0;
 }
 #hh1{
-    position:absolute;
     left:500px;
     top:50px;
 }
 .about{
-    position: absolute;   /* 恢复绝对定位 */
-    left: 500px;          /* 原来的水平位置 */
-    top: 150px;           /* 原来的垂直位置 */
+    
+    margin-left: 0px;
 }
 .tail{
     position:absolute;
     left:500px;
     top:150px;
+}
+#hh11{
+    position:absolute;
+    left:500px;
+    top:50px;
 }
