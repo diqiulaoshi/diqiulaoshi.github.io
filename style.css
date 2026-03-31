@@ -43,17 +43,15 @@ body{
     position: relative; 
 }
 .main{
-    max-width:1200px;
+    width:1200px;
     margin:0 auto;
     flex:1;
     padding-bottom: 80px;
 }
 .hexin{
     position:absolute;
-    top:200px;
-    width:1200px;
-    left:300px;
-    margin:0 auto;
+    top:150px;
+    left:750px;
     text-align:center;
 }
 .card{
@@ -61,7 +59,7 @@ body{
     width:fit-content;
     background:transparent;
     padding:12px 30px;
-    color:E23AFB;
+    color:#E23AFB;
     border:2px solid #E23AFB;
     border-radius:40px;/*圆角*/
     font-size:30px;
@@ -117,4 +115,25 @@ body{
     position:absolute;
     left:500px;
     top:50px;
+}
+#title{
+    border-right:2px solid #E23AFB;
+    white-space:nowrap;
+    overflow: hidden; 
+    animation: blink 0.7s step-end infinite;
+}
+@keyframes blink{
+    0%,100%{
+        border-color:transparent;
+    }
+    50%{
+        border-color:#E23AFB;
+    }
+}
+@media (max-width: 768px){
+    body{
+        width:1200px;
+        overflow-x:auto;
+        margin:0;
+    }
 }

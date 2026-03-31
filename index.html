@@ -13,7 +13,7 @@
             
             <img src="签名图.png" alt="签名图片" class="qianmingtu">
             <div class="hexin"><!--这个是首页的文字部分-->
-                <h1>欢迎来到我的网站</h1>
+                <h1 id="title"></h1>
                 <h2>@地球牢尸</h2>
             </div>
         </div>
@@ -23,5 +23,18 @@
             <p>联系我:</p>
             <p>邮箱:diqiulaoshi@hotmail.com/QQ:qwerdqls</p>
         </footer>
+        <script>
+            let title=document.getElementById("title");
+            let text="欢迎来到我的网站";
+            let i=0;
+            function type(){//打字
+                if(i<text.length){
+                    title.innerHTML+=text[i];
+                    i++;
+                    setTimeout(type,300);
+                }
+            }
+            type();
+        </script>
     </body>
 </html>
