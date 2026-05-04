@@ -47,6 +47,10 @@ body{
     flex-direction: column;
     position: relative;
 }
+a{
+    color:#3DF8F8;
+    text-decoration:none;
+}
 .main{
     min-width:1200px;
     margin:0 auto;
@@ -132,6 +136,25 @@ body{
     text-align: center;
     font-size: 15px;
     padding: 10px 0;
+}
+.project{
+    backdrop-filter:blur(10px);
+    margin-top:25px;
+    margin-left:30%;
+    width:35%;
+    padding:6px 30px;
+    border:2px solid #3DF8F8;
+    border-radius:10px;
+    box-shadow:0 0 20px #3DF8F8;
+    display:flex;
+    flex-direction:column;
+}
+.project:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 40px #3DF8F8;
+}
+.right{
+    text-align:right;
 }
 @keyframes blink{
     0%,100%{
