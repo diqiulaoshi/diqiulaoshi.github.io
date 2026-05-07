@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>VSCode美化教程</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="cg">
+            <a href="artcle.html" class="card">返回列表</a>
+            <a href="index.html" class="card">返回首页</a>
+        </div>
+        <div id="sign" class="qianmingtu"></div>
+        <h1 id="hh11">VSCode美化教程(自用)</h1>
+        <div class="about">
+            <h5>  
+                1.下载VSCode(别告诉我这个没有下):<br>网址:<a href="https://code.visualstudio.com">https://code.visualstudio.com</a>
+            </h5>
+            <h5>
+                2.下载扩展:<br>《Woodfish Theme》《Catppuccin Icons for VSCode》《Carbon Product Icons》
+                《Custom CSS and JS Loader》(woodfish自带)《indent-rainbow》《Power Mode》
+            </h5>
+            <h5>
+                3.下载美化文件(.zip):<a href="project.html" class="aa">点这里</a>
+            </h5>
+            <h5>
+                4.根据实际情况配置:<br>  先将压缩包解压至某一个目录下,将settings.json文件复制到项目的.vscode文件夹内(没有就自己新建一个),
+                在settings.json内找到第20行,将引号内的路径改为自己.css文件的路径(绝对路径),
+                比如"file:///D:/vsstyle.css",保存后,打开命令面板,输入"Reload Custom CSS and JS",重启VSCode就好了
+            </h5>
+            <h5>
+                5.该主题简介:<br>  这是一个赛博朋克风的主题,背景为《2026 Dark》的颜色,属于比较黑的颜色,在这基础上,我添加了一些霓虹灯
+                颜色的描边,主要是霓虹粉和亮青色。<br>
+                图标方面,我用了《Catppuccin Icons for VSCode》作为文件图标,《Carbon Product Icons》作为产品图标,这两个我都是
+                用了很久的,十分顺眼,也十分贴合我写的这个美化。<br>
+                关键字高亮方面,我用了《Woodfish Theme》,这个主题的配色十分好看,有渐变色以及发光效果,支持超多语言(至少有c++ HTML CSS
+                cmake python(￣▽￣))(不支持也不是我的事,反正是直接用的他的主题),即使是不支持的,颜色也不是单一的,比如说纯文本,他会变成
+                五彩斑斓的白。<br>
+                细节方面,我添加了《indent-rainbow》扩展,添加了彩虹缩进。以及《Power Mode》扩展,添加了打字特效,默认是粒子效果,不挡视野,
+                并且我去掉了一些烦人的效果,比如屏幕抖动 连击计数器。通过《Custom CSS and JS Loader》扩展,我将行号换成了更具有科技感的字体。
+                并且通过《Woodfish Theme》插件,有选中行行号发光的效果,还有渐变色高光。
+            </h5>
+            <h5>
+                6.注意事项:<br>
+                这个美化文件需要rog fonts字体,如果没有这个字体的话,也没事,我在压缩包里还有一些字体,都是免费开源,很好看的。其中,我最推荐
+                那个液晶显示器字体,就是那个没有放在其他文件夹里的.ttf文件,点击安装。之后,可以到解压出的.css文件里修改为那个字体(把rog 
+                fonts改掉),然后打开命令面板,输入"Reload Custom CSS and JS",重启VSCode就好了。<br>
+                这些东西改好之后VSCode可能会提示Code已损坏,需要重新安装,但其实没事,可能是因为光标等被修改了,是不影响大家正常使用的。
+            </h5>
+        </div>
+        <footer class="foot">
+            <p>developed by diqiulaoshi</p>
+            <p>@2026 地球牢尸.保留所有权利</p>
+            <p>联系我:</p>
+            <p>邮箱:diqiulaoshi@hotmail.com/QQ:qwerdqls</p>
+        </footer>
+        <script type="module">
+            import * as THREE from 'https://unpkg.com/three@0.128.0/build/three.module.js';
+            //
+            const canvas=document.getElementById("sign");
+            const w=canvas.clientWidth;
+            const h=canvas.clientHeight;
+            //
+            const scene=new THREE.Scene();
+            const camera=new THREE.PerspectiveCamera(45,w/h,0.1,1000);
+            camera.position.set(0,0,2.5);
+            camera.lookAt(0,0,0);
+            //
+            const renderer=new THREE.WebGLRenderer({alpha:true});//透明背景
+            renderer.setSize(w,h);
+            renderer.setClearColor(0x000000,0);//背景透明
+            canvas.appendChild(renderer.domElement);
+            //
+            const ambientlight=new THREE.AmbientLight(0x404060);
+            scene.add(ambientlight);
+            const dirlight=new THREE.DirectionalLight(0xffffff,1);
+            dirlight.position.set(2,3,4);
+            scene.add(dirlight);
+            const backLight=new THREE.DirectionalLight(0xff44ff,0.5);
+            backLight.position.set(-2,1,-3);
+            scene.add(backLight);
+            //
+            const loader=new THREE.TextureLoader();
+            const sign=loader.load("sign2.png");
+            sign.colorSpace=THREE.SRGBColorSpace;
+            //
+            const frontMaterial=new THREE.MeshStandardMaterial({map:sign,metalness:0.2,roughness:0.3});
+            const colors=[0x3DF8F8,0xE23AFB,0x74FF01,0x0E48C1];
+            const color=colors.map(c=>new THREE.MeshStandardMaterial({color:c,metalness:0.7,roughness:0.3}));
+            const materials=[
+                color[0],
+                color[1],
+                color[2],
+                color[3],
+                frontMaterial,
+                color[0]
+            ];
+            //
+            const geometry=new THREE.BoxGeometry(1.1,1.1,1.1);
+            const cube=new THREE.Mesh(geometry,materials);
+            scene.add(cube);
+            //
+            function animate(){
+                requestAnimationFrame(animate);
+                cube.rotation.x+=0.01;
+                cube.rotation.y+=0.01;
+                //cube.rotation.z+=0.01;
+                renderer.render(scene,camera);
+            }
+            animate();
+            window.addEventListener('resize', () => {
+                const newWidth = canvas.clientWidth;
+                const newHeight = canvas.clientHeight;
+                renderer.setSize(newWidth, newHeight);
+                camera.aspect = newWidth / newHeight;
+                camera.updateProjectionMatrix();
+            });
+        </script>
+    </body>
+</html>

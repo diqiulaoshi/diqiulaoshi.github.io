@@ -1,4 +1,5 @@
 p{
+    text-indent: 2em;
     color:rgb(64, 237, 231);
     font-size:15px;
 }
@@ -19,8 +20,12 @@ h3{
 }
 h4{
     color:#39ff14;
-    font-size:25px;
+    font-size:20px;
     text-shadow:0 0 10px #39ff14;
+}
+h5{
+    color:#3DF8F8;
+    font-size:18px;
 }
 ul{
     list-style-type:square;
@@ -50,6 +55,11 @@ body{
 a{
     color:#3DF8F8;
     text-decoration:none;
+}
+.indent {
+    white-space: pre-wrap;
+    padding-left: 2em;
+    text-indent: -2em;
 }
 .main{
     min-width:1200px;
@@ -95,11 +105,10 @@ a{
 }
 .qianmingtu{
     position:absolute;
-    width:350px;
-    height:auto;
-    top:50px;
+    width:25%;
+    height:25%;
+    top:75px;
     left:70%;
-    filter:drop-shadow(0 0 10px #3DF8F8);
 }
 .foot{
     margin-top:auto;
@@ -115,9 +124,14 @@ a{
 }
 .about{
     margin-left:30%;
+    width:40%;
+    margin-right:30%;
 }
 .tail{
     margin-left:30%;
+}
+.aa{
+    text-decoration:underline;
 }
 #hh11{
     margin-left:30%;
