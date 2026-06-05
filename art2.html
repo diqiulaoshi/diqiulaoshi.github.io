@@ -11,44 +11,38 @@
             <a href="index.html" class="card">返回首页</a>
         </div>
         <div id="sign" class="qianmingtu"></div>
-        <h1 id="hh11">VSCode美化教程(自用)</h1>
+        <h1 id="hh11">ASCII艺术时钟环境配置</h1>
         <div class="about">
-            <h5>  
-                1.下载VSCode(别告诉我这个没有下):<br>
-                网址:<a href="https://code.visualstudio.com" class="a2">https://code.visualstudio.com</a>
+            <h5>
+                1.下载VSCode(推荐)<br>
+                网址:<a href="https://code.visualstudio.com" class="a2">https://code.visualstudio.com</a><br>
+                配置好后也可以直接在cmd或powershell中运行,不过谁会单独用一个终端来运行这个时钟呢(￣▽￣)
             </h5>
             <h5>
-                2.下载扩展:<br>《Woodfish Theme》《Catppuccin Icons for VSCode》《Carbon Product Icons》
-                《Custom CSS and JS Loader》(woodfish自带)《indent-rainbow》《Power Mode》
+                2.下载.exe文件<br>
+                点击<a href="project.html" class="a2">这里</a>找到ASCII艺术时钟项目,点击下载.exe
             </h5>
             <h5>
-                3.下载美化文件(.zip):<a href="project.html" class="a2">点这里</a>
+                3.将.exe文件添加至path环境变量<br>
+                也不算是必须的,只要你能忍受只在特定目录下使用就行(但还是建议添加的)<br>
+                其实配置过c++环境的同学应该已经会了,不过我还是写一下吧(￣▽￣)<br>
+                以Win11系统为例,在搜索栏中搜索"环境变量",点击"编辑系统环境变量",在上方横栏中选择"高级",点击"环境变量",
+                找到用户变量中的"path",双击打开,点击新建,输入.exe文件所在目录的路径,如D:\_tui,点击确定即可
             </h5>
             <h5>
-                4.根据实际情况配置:<br>  先将压缩包解压至某一个目录下,将settings.json文件复制到项目的.vscode文件夹内(没有就自己新建一个),
-                在settings.json内找到第20行,将引号内的路径改为自己.css文件的路径(绝对路径),
-                比如"file:///D:/vsstyle.css",保存后,打开命令面板,输入"Reload Custom CSS and JS",重启VSCode就好了
+                4.外观简介<br>
+                这个时钟的数字使用ASCII字符拼起来的,比较有终端的风格,包括旁边的CLOCK大字,也是用字符拼起来的轮廓,
+                看起来十分有CLI美学(CLI美学是自创词(￣▽￣))
+                下文会讲的,这个时钟是建议在VSCode的集成终端中使用的,并且我建议同时搭配
+                <a href="art1.html" class="a2">VSCode美化教程</a>的美化文件一起使用,因为这个时钟中的颜色和这个VSCode
+                美化文件中的轮廓线颜色是一样的
             </h5>
             <h5>
-                5.该主题简介:<br>  这是一个赛博朋克风的主题,背景为《2026 Dark》的颜色,属于比较黑的颜色,在这基础上,我添加了一些霓虹灯
-                颜色的描边,主要是霓虹粉和亮青色。<br>
-                图标方面,我用了《Catppuccin Icons for VSCode》作为文件图标,《Carbon Product Icons》作为产品图标,这两个我都是
-                用了很久的,十分顺眼,也十分贴合我写的这个美化。<br>
-                关键字高亮方面,我用了《Woodfish Theme》,这个主题的配色十分好看,有渐变色以及发光效果,支持超多语言(至少有c++ HTML CSS
-                cmake python(￣▽￣))(不支持也不是我的事,反正是直接用的他的主题),即使是不支持的,颜色也不是单一的,比如说纯文本,他会变成
-                五彩斑斓的白。<br>
-                细节方面,我添加了《indent-rainbow》扩展,添加了彩虹缩进。以及《Power Mode》扩展,添加了打字特效,默认是粒子效果,不挡视野,
-                并且我去掉了一些烦人的效果,比如屏幕抖动 连击计数器。通过《Custom CSS and JS Loader》扩展,我将行号换成了更具有科技感的字体。
-                并且通过《Woodfish Theme》插件,有选中行行号发光的效果,还有渐变色高光。
-            </h5>
-            <h5>
-                6.注意事项:<br>
-                这个美化文件需要rog fonts字体,如果没有这个字体的话,也没事,我在压缩包里还有一些字体,都是免费开源,很好看的。其中,我最推荐
-                那个液晶显示器字体,就是那个没有放在其他文件夹里的.ttf文件,点击安装。之后,可以到解压出的.css文件里修改为那个字体(把rog 
-                fonts改掉),然后打开命令面板,输入"Reload Custom CSS and JS",重启VSCode就好了。<br>
-                这些东西改好之后VSCode可能会提示Code已损坏,需要重新安装,但其实没事,可能是因为光标等被修改了,是不影响大家正常使用的。<br>
-                这个美化文件毕竟是按照我自己的审美去做的,可能不适合所有人,如果不喜欢或者有修改意见的话,可以发我邮件或者QQ(建议发QQ(￣▽￣)
-                ),我会尽量迎合大家的要求的。
+                5.注意事项<br>
+                由于代码里用windows.h中的SetConsoleMode和ENABLE_VIRTUAL_TERMINAL_PROCESSING,用来开启虚拟终端处理。
+                这个功能从 Windows 10 1511 版本才开始支持,所以这个艺术时钟只在Win11或Win10可运行<br>
+                这个时钟最开始的设计目的是在F11全屏下的vscode集成终端中使用的,主要目的是在全屏状态下集中注意力的同时
+                也能看时间,所以这个时钟并不建议在cmd或powershell中使用
             </h5>
         </div>
         <footer class="foot">

@@ -24,7 +24,7 @@ h4{
     text-shadow:0 0 10px #39ff14;
 }
 h5{
-    color:#3DF8F8;
+    color:#D0F0FF;
     font-size:18px;
 }
 ul{
@@ -169,6 +169,10 @@ a{
 }
 .right{
     text-align:right;
+}
+.a2{
+    color:#E0F0FF;
+    text-decoration:underline;
 }
 @keyframes blink{
     0%,100%{
