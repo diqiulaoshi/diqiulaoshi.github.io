@@ -40,7 +40,7 @@ html, body {
     padding: 0;
 }
 html{
-    background:linear-gradient(145deg,#121314,#0d1216,#0A3A9E,#0d1216,#121314) no-repeat fixed;
+    background:linear-gradient(150deg,#121314,#0d1216,#0A3A9E,#0d1216,#121314) no-repeat fixed;
     background-size: 100% 100%;
 }
 body{
@@ -81,7 +81,7 @@ a{
     padding:12px 30px;
     color:#E23AFB;
     border:2px solid #E23AFB;
-    border-radius:40px;/*圆角*/
+    border-radius:10px;/*圆角*/
     font-size:30px;
     font-weight:bold;
     text-decoration:none;

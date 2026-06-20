@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>启动页 - 网格方块转场</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0a0a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            padding-bottom: 60px;
+        }
+
+        /* ===== 第一阶段 ===== */
+        #launchPhase {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            transition: opacity 0.8s ease;
+            margin-bottom: 40px;
+        }
+        #launchPhase.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .letter-window {
+            width: 200px;
+            height: 140px;
+            overflow: hidden;
+            position: relative;
+            border: 2px solid #888;
+            background: #111;
+            margin-bottom: 30px;
+            mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent);
+        }
+
+        .letter-strip {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            will-change: transform;
+            transition: none;
+        }
+
+        .letter-item {
+            height: 140px;
+            line-height: 140px;
+            font-size: 72px;
+            font-weight: bold;
+            color: #fff;
+            width: 100%;
+            text-align: center;
+            flex-shrink: 0;
+            letter-spacing: 8px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 320px;
+            height: 4px;
+            background: #333;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #fff;
+            transition: width 0.1s linear;
+        }
+
+        .hint {
+            color: #555;
+            font-size: 12px;
+            margin-top: 16px;
+            letter-spacing: 3px;
+            font-family: monospace;
+        }
+
+        /* ===== 第二阶段：方块转场 ===== */
+        #blockPhase {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            background: #0a0a0a;
+            padding: 40px 20px 60px 20px;
+        }
+
+        /* 方块网格容器 */
+        .blocks-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: -2px;
+            width: 90%;
+            max-width: 720px;
+            aspect-ratio: 1 / 1;
+            margin-bottom: 40px;
+            perspective: 800px;
+        }
+
+        .block {
+            background: #fff;
+            opacity: 0;
+            transform: translateX(200px) rotateY(30deg) scale(0.6);
+            transition: none;
+            border-radius: 2px;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            /* 方形 */;
+        }
+
+        /* 最终文字 + 按钮区域 (位于底部) */
+        .bottom-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .final-text {
+            color: #fff;
+            font-size: 32px;
+            letter-spacing: 6px;
+            opacity: 0;
+            transition: opacity 0.8s ease 0.3s;
+            margin-bottom: 24px;
+            font-weight: 300;
+            text-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+        }
+        .final-text.show {
+            opacity: 1;
+        }
+
+        .enter-btn {
+            padding: 16px 56px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #0a0a0a;
+            background: #fff;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.3s ease;
+            letter-spacing: 4px;
+            border-radius: 2px;
+        }
+        .enter-btn.show {
+            opacity: 1;
+        }
+        .enter-btn:hover {
+            transform: scale(1.05);
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== 第一阶段：双字母滚动 ====== -->
+    <div id="launchPhase">
+        <div class="letter-window">
+            <div class="letter-strip" id="letterStrip"></div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="hint">◈ 正在加载核心模块 ◈</div>
+    </div>
+
+    <!-- ====== 第二阶段：网格方块转场 ====== -->
+    <div id="blockPhase">
+        <div class="blocks-grid" id="blocksGrid"></div>
+        <div class="bottom-area">
+            <div class="final-text" id="finalText">✦ 系统就绪 ✦</div>
+            <button class="enter-btn" id="enterBtn">进入主站</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        //  1. 配置
+        // ============================================================
+        const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+        const target = 'LS';
+        const pairs = [];
+        for (let i = 0; i < 20; i++) {
+            const a = letters[Math.floor(Math.random() * 26)];
+            const b = letters[Math.floor(Math.random() * 26)];
+            pairs.push(a + b);
+        }
+        if (!pairs.includes(target)) pairs[10] = target;
+        const uniquePairs = [...new Set(pairs)];
+        const idx = uniquePairs.indexOf(target);
+        if (idx > -1) { uniquePairs.splice(idx, 1);
+            uniquePairs.push(target); }
+        while (uniquePairs.length < 30) {
+            const a = letters[Math.floor(Math.random() * 26)];
+            const b = letters[Math.floor(Math.random() * 26)];
+            const cand = a + b;
+            if (!uniquePairs.includes(cand) && cand !== target) uniquePairs.push(cand);
+        }
+        const targetIdx = uniquePairs.indexOf(target);
+        if (targetIdx > -1) {
+            uniquePairs.splice(targetIdx, 1);
+            uniquePairs.splice(Math.floor(uniquePairs.length * 0.7), 0, target);
+        }
+
+        const PAIRS = uniquePairs;
+        const TARGET_PAIR = target;
+        const WINDOW_HEIGHT = 140;
+
+        const launchPhase = document.getElementById('launchPhase');
+        const blockPhase = document.getElementById('blockPhase');
+        const strip = document.getElementById('letterStrip');
+        const progressFill = document.getElementById('progressFill');
+        const blocksGrid = document.getElementById('blocksGrid');
+        const finalText = document.getElementById('finalText');
+        const enterBtn = document.getElementById('enterBtn');
+
+        let startTime = null;
+        let animationComplete = false;
+        let targetIndex = -1;
+
+        // ============================================================
+        //  2. 构建字母带
+        // ============================================================
+        function buildStrip() {
+            for (let round = 0; round < 2; round++) {
+                for (let i = 0; i < PAIRS.length; i++) {
+                    const div = document.createElement('div');
+                    div.className = 'letter-item';
+                    div.textContent = PAIRS[i];
+                    strip.appendChild(div);
+                }
+            }
+            const totalItems = strip.children.length;
+            const midRoundStart = Math.floor(totalItems / 2);
+            for (let i = midRoundStart; i < midRoundStart + PAIRS.length; i++) {
+                if (strip.children[i].textContent === TARGET_PAIR) {
+                    targetIndex = i;
+                    break;
+                }
+            }
+            if (targetIndex === -1) targetIndex = midRoundStart + Math.floor(PAIRS.length * 0.7);
+        }
+        buildStrip();
+
+        // ============================================================
+        //  3. 滚动动画
+        // ============================================================
+        function animateLetters(timestamp) {
+            if (!startTime) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+            const progress = Math.min(elapsed / 6000, 1);
+
+            const totalSteps = targetIndex + 6;
+            const eased = 1 - Math.pow(1 - progress, 2.2);
+            const rawIndex = Math.floor(eased * totalSteps);
+            const maxIndex = strip.children.length - 1;
+            const safeIndex = Math.min(rawIndex, maxIndex);
+
+            const offset = safeIndex * WINDOW_HEIGHT;
+            strip.style.transform = `translateY(-${offset}px)`;
+            progressFill.style.width = (progress * 100) + '%';
+
+            const currentText = strip.children[safeIndex]?.textContent || '';
+            if (currentText === TARGET_PAIR && progress > 0.4 && !animationComplete) {
+                if (progress >= 0.92) {
+                    animationComplete = true;
+                    strip.style.transform = `translateY(-${targetIndex * WINDOW_HEIGHT}px)`;
+                    progressFill.style.width = '100%';
+                    setTimeout(() => switchToBlockPhase(), 400);
+                    return;
+                }
+            }
+
+            if (progress < 1 && !animationComplete) {
+                requestAnimationFrame(animateLetters);
+            } else if (!animationComplete) {
+                animationComplete = true;
+                strip.style.transform = `translateY(-${targetIndex * WINDOW_HEIGHT}px)`;
+                progressFill.style.width = '100%';
+                setTimeout(() => switchToBlockPhase(), 400);
+            }
+        }
+
+        // ============================================================
+        //  4. 网格方块转场
+        // ============================================================
+        function switchToBlockPhase() {
+            launchPhase.classList.add('hidden');
+            blockPhase.style.display = 'flex';
+
+            // 生成 6x6 = 36 个方块
+            const totalBlocks = 36;
+            const blocks = [];
+            for (let i = 0; i < totalBlocks; i++) {
+                const block = document.createElement('div');
+                block.className = 'block';
+                block.style.opacity = '0';
+                // 每个方块随机偏移，增加动感
+                const delayOffset = Math.random() * 60;
+                block.dataset.delay = delayOffset;
+                // 随机旋转起始角度
+                const rotY = 20 + Math.random() * 50;
+                block.style.transform = `translateX(${150 + Math.random() * 150}px) rotateY(${rotY}deg) scale(0.5)`;
+                blocksGrid.appendChild(block);
+                blocks.push(block);
+            }
+
+            // 逐块飞入（按行列顺序，但每块有随机微延迟）
+            blocks.forEach((block, index) => {
+                const baseDelay = index * 45; // 行列顺序
+                const randomDelay = parseFloat(block.dataset.delay) || 0;
+                const totalDelay = baseDelay + randomDelay;
+
+                setTimeout(() => {
+                    block.style.transition =
+                        'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease';
+                    // 最终归位，微调位置
+                    const finalX = (Math.random() - 0.5) * 12;
+                    const finalY = (Math.random() - 0.5) * 12;
+                    block.style.transform =
+                        `translateX(${finalX}px) translateY(${finalY}px) rotateY(0deg) scale(1)`;
+                    block.style.opacity = '1';
+                }, totalDelay);
+            });
+
+            // 显示文字和按钮
+            const maxDelay = blocks.length * 45 + 60 + 600;
+            setTimeout(() => {
+                finalText.classList.add('show');
+            }, maxDelay);
+            setTimeout(() => {
+                enterBtn.classList.add('show');
+            }, maxDelay + 400);
+        }
+
+        // ============================================================
+        //  5. 按钮跳转
+        // ============================================================
+        enterBtn.addEventListener('click', function() {
+            window.location.href = 'https://diqiulaoshi.github.io';
+        });
+
+        // ============================================================
+        //  6. 启动
+        // ============================================================
+        requestAnimationFrame(animateLetters);
+    </script>
+</body>
+</html>
