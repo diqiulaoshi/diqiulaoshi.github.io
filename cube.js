@@ -26,7 +26,7 @@ export function initCube(containerId) {
     scene.add(backLight);
     //
     const loader=new THREE.TextureLoader();
-    const sign=loader.load("sign2.png");
+    const sign=loader.load("logo.png");
     sign.colorSpace=THREE.SRGBColorSpace;
     //
     const frontMaterial=new THREE.MeshStandardMaterial({map:sign,metalness:0.2,roughness:0.3});
