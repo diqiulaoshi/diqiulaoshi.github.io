@@ -1,3 +1,10 @@
+@font-face{
+    font-family:'LSf';
+    src:url('ANAKRON.ttf') format('opentype');
+    font-weight:normal;
+    font-style:normal;
+    font-display:swap;
+}
 p{
     text-indent: 2em;
     color:rgb(64, 237, 231);
@@ -14,9 +21,9 @@ h2{
     text-shadow:0 0 10px #3DF8F8;
 }
 h3{
-    color:#3EEDE7;
+    color:#3df8f8;
     font-size:25px;
-    text-shadow:0 0 5px #3EEDE7;
+    text-shadow:0 0 5px #3df8f8;
 }
 h4{
     color:#39ff14;
@@ -108,7 +115,7 @@ a{
     z-index:-1;
     padding:2px;
     border-radius:10px;
-    background-image: conic-gradient(from var(--angle),#3df8f8 30%,#e23afb,transparent 15%,#e23afb,#3df8f8);
+    background-image: conic-gradient(from var(--angle),transparent 10%,#3df8f8 30%,#e23afb,#e23afb,#3df8f8);
     animation:3s spin linear infinite;
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
@@ -120,7 +127,7 @@ a{
     mask-composite: exclude;
 }
 .card::before{
-    filter:blur(10px);
+    filter:blur(50px);
 }
 .card:hover{
     transform:translateY(-2px);
@@ -162,7 +169,7 @@ a{
     padding: 10px 0;
 }
 #hh1{
-    margin-left:30%;
+    margin-left:20%;
     margin-top:50px;
 }
 .about{
@@ -177,17 +184,17 @@ a{
     border-radius:10px;
 }
 .about2{
-    margin-left:30%;
+    margin-left:20%;
     width:55%;
 }
-.tail{
-    margin-left:30%;
-}
+/*.tail{
+    margin-left:5%;
+}*/
 .aa{
     text-decoration:underline;
 }
 #hh11{
-    margin-left:10%;
+    margin-left:5%;
 }
 #title{
     border-right:2px solid #E23AFB;
@@ -269,4 +276,35 @@ a{
         overflow-x:auto;
         margin:0;
     }
+}
+.ctext,.ctext2{
+    color:#ffffff;
+    position:absolute;
+    top:230px;
+    left:46%;
+    transform:translate(-50%);
+    text-align:center;
+    font-family:'LSf', monospace;
+    text-shadow:0 0 0px #3DF8F8;
+}
+.ctext2{
+    top:230px;
+    left:50%;
+    transform:translate(-50%);
+}
+.ctext::after,.ctext::before,.ctext2::after,.ctext2::before{
+    content:"_LS_";
+    font-family:'LSf', monospace;
+    position:absolute;
+    left:0;
+    top:0;
+    mix-blend-mode: screen;
+}
+.ctext::after,.ctext2::after{
+    color:#ff0000;
+    transform: translateX(5px);
+}
+.ctext::before,.ctext2::before{
+    color:#0000ff;
+    transform: translateX(-5px);
 }

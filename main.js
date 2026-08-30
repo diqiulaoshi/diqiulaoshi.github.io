@@ -7,16 +7,12 @@ for(let i=0;i<60;i++){
     pairs.push(a+b);
 }
 pairs.push(target);  
-
 const launchPH=document.getElementById('launchPH');
-const blkPH=document.getElementById('blkPH');
 const ltr_str=document.getElementById('ltr_str');
 const pro_fill=document.getElementById('pro_fill');
-const blk_grid=document.getElementById('blk_gird');
 const Ftxt=document.getElementById('Ftxt');
 const Card=document.getElementById('Card');
 const hint=document.getElementById('hint');
-
 let startT=null;
 let anivis=false;
 let targetIDX=60;
@@ -48,38 +44,34 @@ function aniltr(timestamp){
         anivis = true;
         ltr_str.style.transform = `translateY(-${idx * 140}px)`;
         pro_fill.style.width = '100%';
-        setTimeout(() => BlkPh(), 400);
+        setTimeout(() => BlkPH(), 400);
         return;
     }
     if(pro<1){
         requestAnimationFrame(aniltr);
     }
 }
-function BlkPh(){
+function BlkPH(){
     launchPH.classList.add('hid');
-    blkPH.style.display='flex';
-    const tot=36;
-    for(let i=0;i<tot;i++){
-        const blk=document.createElement('div');
-        blk.className='blk';
-        blk.style.opacity='0';
-        blk.style.transform = 'translateX(200px) rotateY(30deg) scale(0.6)';
-        blk_grid.appendChild(blk);
+    blkPH.style.display = 'flex';
+    blkPH.style.flexDirection = 'column';
+    blkPH.style.alignItems = 'center';
+    blkPH.style.justifyContent = 'center';
+    const logo=document.getElementById(`logo`);
+    if (logo) {
+        logo.classList.remove('logo-vis');
+        // 强制回流
+        void logo.offsetWidth;
+        logo.classList.add('logo-vis');
     }
-    const blks=document.querySelectorAll('.blk');
-    blks.forEach((blk,idx)=>{
-        const delay=idx*45;
-        setTimeout(()=>{
-            blk.style.transition = 'transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease';
-            blk.style.transform = 'translateX(0px) rotateY(0deg) scale(1)';
-            blk.style.opacity = '1';
-        },delay)
-    });
-    const Delay=36*60+600;
-    setTimeout(()=>{
+    const fadeDuration = 1800 + 300;
+    setTimeout(() => {
         Ftxt.classList.remove('hid');
+        Ftxt.classList.add('show');
+    }, fadeDuration);
+    setTimeout(() => {
         Card.classList.remove('hid');
-    },Delay+400);
+        Card.classList.add('show');
+    }, fadeDuration + 400);
 }
-
 requestAnimationFrame(aniltr);

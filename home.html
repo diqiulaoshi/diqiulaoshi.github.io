@@ -22,12 +22,16 @@
             <div id="sign" class="qianmingtu"></div>
             <div class="hexin"><!--这个是首页的文字部分-->
                 <h1 id="title"></h1>
-                <h2>LS</h2>
             </div>
+            <h1 class="ctext2">_LS_</h1>
+            <h1 class="ctext">_LS_</h1>
+            <h1 class="ctext">_LS_</h1>
+            <h1 class="ctext">_LS_</h1>
+            <h1 class="ctext">_LS_</h1>
         </div>
         <footer class="foot">
-            <p>developed by diqiulaoshi</p>
-            <p>@2026 地球牢尸.保留所有权利</p>
+            <p>developed by _LS_</p>
+            <p>@2026 LS.保留所有权利</p>
             <p>联系我:</p>
             <p>邮箱:diqiulaoshi@hotmail.com/QQ:qwerdqls</p>
         </footer>
@@ -48,6 +52,29 @@
         <script type="module">
             import {initCube} from './cube.js';
             initCube("sign");
+        </script>
+        <script>
+            const faulttext={
+                player:{},
+                texts:[],
+                init(){
+                    this.texts=[...document.getElementsByClassName('ctext')];
+                },
+                fault(){
+                    this.player=setInterval(()=>{
+                        this.texts.forEach((text)=>{
+                            text.style.transform=`translate(${Math.random()*20-10}%,${Math.random()*20-10}%)`;
+                            let x=Math.random()*100;
+                            let y=Math.random()*100;
+                            let w=Math.random()*50+50;
+                            let h=Math.random()*50+50;
+                            text.style.clipPath=`polygon(${x}% ${y}%,${x+w}% ${y}%,${x+w}% ${y+h}%,${x}% ${y+h}%)`;
+                        })
+                    },100);
+                }
+            };
+            faulttext.init();
+            faulttext.fault();
         </script>
     </body>
 </html>

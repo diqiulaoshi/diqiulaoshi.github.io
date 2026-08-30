@@ -1,6 +1,6 @@
 @font-face{
     font-family:'LSfont';
-    src:url('Apex Mk3-Medium.otf') format('opentype');
+    src:url('Apex\ Mk3-Medium.otf') format('opentype');
     font-weight:normal;
     font-style:normal;
     font-display:swap;
@@ -77,46 +77,8 @@ body{
     background:#D0F0FF;
     transition:width 0.1s linear;
 }
-#blkPH{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    z-index:20;
-    background:transparent;
-    padding:40px 20px 60px 20px;
-}
-.blk-grid{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: -2px;
-    width: 90%;
-    max-width: 720px;
-    aspect-ratio: 1/1;
-    perspective: 800px;
-}
-.blk{
-    background:#D0F0FF;
-    opacity:0;
-    transform:translateX(200px) rotateY(30deg) scale(0.6);
-    transition:none;
-    border-radius:2px;
-    width:100%;
-    aspect-ratio:1/1;
-}
-.btn-grp{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 500px;
-}
 .card{
+    position:absolute;
     display:flex;
     width:fit-content;
     background:transparent;
@@ -127,6 +89,7 @@ body{
     font-size:30px;
     font-weight:bold;
     text-decoration:none;
+    top:80%;
     /*--------------*/
     box-shadow:0 0 20px #D0F0FF;
     text-shadow:0 0 5px #D0F0FF;
@@ -159,7 +122,33 @@ body{
     letter-spacing: 3px;
     font-family: monospace;
 }
-.hid { opacity: 0;
+.hid { 
+    opacity: 0;
     pointer-events: none; 
     transition: opacity 0.5s ease; 
+}
+#blkPH {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+    background: transparent; /* 或者你想要的背景色 */
+    padding: 40px 20px;
+}
+.logo-hidden {
+    opacity: 0;
+    transition: opacity 1.8s ease-out;
+    width: 800px;
+    height: auto;
+    display: block;
+    margin-bottom: 30px;
+}
+.logo-vis{
+    opacity:1;
 }
