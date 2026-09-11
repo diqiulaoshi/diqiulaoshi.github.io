@@ -13,12 +13,14 @@
         </script>
     </head>
     <body>
+        
         <div class="cg">
                 <a href="about.html" class="card">个人介绍</a>
                 <a href="project.html" class="card">我的项目</a>
                 <a href="artcle.html" class="card">我的文章</a>
             </div>
         <div class="main"><!--主体-->
+            <canvas id="c"></canvas>
             <div id="sign" class="qianmingtu"></div>
             <div class="hexin"><!--这个是首页的文字部分-->
                 <h1 id="title"></h1>
@@ -52,6 +54,11 @@
         <script type="module">
             import {initCube} from './cube.js';
             initCube("sign");
+        </script>
+        <script src="rain.js"></script>
+        <script>
+            const rain = MatrixRain('#c');   // 或用自定义参数
+            rain.start();
         </script>
         <script>
             const faulttext={

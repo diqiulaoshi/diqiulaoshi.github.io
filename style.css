@@ -73,7 +73,8 @@ a{
     text-indent: -2em;
 }
 .main{
-    min-width:1200px;
+    position: relative;
+    min-width:100%;
     margin:0 auto;
     flex:1;
     padding-bottom: 80px;
@@ -151,7 +152,8 @@ a{
     align-items:flex-start;
     gap:40px;
     top:200px;
-    left:50px;
+    left:5%;
+    z-index:78;
 }
 .qianmingtu{
     position:absolute;
@@ -307,4 +309,13 @@ a{
 .ctext::before,.ctext2::before{
     color:#0000ff;
     transform: translateX(-5px);
+}
+canvas#c{
+    position:absolute;
+    top:0;
+    height:100%;
+    left:0;
+    width:4%;
+    display:block;
+    pointer-events:none;
 }
