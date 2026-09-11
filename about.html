@@ -19,7 +19,8 @@
             <a href="artcle.html" class="card">我的文章</a>
         </div>
             <div id="sign" class="qianmingtu"></div>
-            
+        <div class="main">
+            <canvas id="c"></canvas>
             <div class="about">
                 <h1 id="hh11">个人介绍</h1>
                 <h3>  2013年初中生,今年七年级,OIer<br></h3>
@@ -39,7 +40,7 @@
                 <h3>这个网页就是我自学前端三件套写的</h3>
                 <h3>我的抖音:_LS_ b站:__LS_//方便的话点个关注(^▽^)</h3>
             </div>
-        
+        </div>
         <footer class="foot">
             <p>developed by _LS_</p>
             <p>@2026 LS.保留所有权利</p>
@@ -50,6 +51,11 @@
         <script type="module">
             import {initCube} from './cube.js';
             initCube("sign");
+        </script>
+        <script src="rain.js"></script>
+        <script>
+            const rain = MatrixRain('#c');   // 或用自定义参数
+            rain.start();
         </script>
     </body>
 </html>
