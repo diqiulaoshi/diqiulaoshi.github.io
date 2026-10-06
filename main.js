@@ -478,7 +478,7 @@ async function boot(){
         newline.textContent=line;
         out.appendChild(newline);
         out.scrollTop = out.scrollHeight;    
-        await sleep(Math.random() * 90);
+        await sleep(Math.random() * 75);
     }
     await sleep(2000);
     BlkPH();
