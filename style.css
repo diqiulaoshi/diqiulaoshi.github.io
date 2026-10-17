@@ -1,16 +1,40 @@
 @font-face{
     font-family:'LSf';
-    src:url('ANAKRON.ttf') format('opentype');
+    src:url('_fonts/ANAKRON.ttf') format('opentype');
     font-weight:normal;
     font-style:normal;
     font-display:swap;
 }
+@font-face{
+    font-family:"fault-text";
+    src:url("_fonts/RubikGlitch-Regular.ttf") format('opentype');
+    /*font-weight:normal;
+    font-style:normal;
+    font-display:swap;*/
+}
+@font-face{
+    font-family:"title-ch";
+    src:url("_fonts/NotoSansTC-Medium.ttf") format('opentype');
+    /*font-weight:normal;
+    font-style:normal;
+    font-display:swap;*/
+}
+@font-face{
+    font-family:"text-ch";
+    src:url("_fonts/NotoSansSC-Medium.ttf") format('opentype');
+}
+@font-face{
+    font-family:"text-en";
+    src:url("_fonts/Exo2-SemiBoldItalic.ttf") format('opentype');
+}
 p{
+    font-family:'text-en','text-ch';
     text-indent: 2em;
     color:rgb(64, 237, 231);
     font-size:15px;
 }
 h1{
+    font-family:'text-en','title-ch','text-ch';
     color:#3DF8F8;
     font-size:50px;
     text-shadow:0 0 10px #3DF8F8;
@@ -21,20 +45,18 @@ h2{
     text-shadow:0 0 10px #3DF8F8;
 }
 h3{
+    font-family:'text-en','text-ch';
     color:#3df8f8;
     font-size:25px;
     text-shadow:0 0 5px #3df8f8;
 }
-h4{
-    color:#39ff14;
-    font-size:20px;
-    text-shadow:0 0 10px #39ff14;
-}
 h5{
+    font-family:'text-en','text-ch';
     color:#D0F0FF;
     font-size:18px;
 }
 ul{
+    font-family:'text-en','text-ch';
     list-style-type:square;
     color:#3EEDE7;
     text-shadow:0 0 5px #3EEDE7;
@@ -96,7 +118,7 @@ a{
     display:flex;
     width:fit-content;
     background-color:transparent;
-    padding:12px 30px;
+    padding:10px 15px;
     font-size:30px;
     font-weight:bold;
     color:#e23afb;
@@ -257,8 +279,6 @@ a{
     color: transparent;
     background-clip: text;
     -webkit-background-clip: text;
-
-    /* 扫描线 + 文字颜色，两层叠一起 */
     background-image:
     repeating-linear-gradient(to bottom,
         rgba(0,0,0,.5) 0 1px,
@@ -286,8 +306,8 @@ a{
 }
 .left-top_corner{
     position:absolute;
-    top:0;
-    left:0;
+    top:-1px;
+    left:-1px;
     width:5%;
     height:5%;
     border-top:3px solid #3DF8F8;
@@ -295,8 +315,8 @@ a{
 }
 .right-top_corner{
     position:absolute;
-    top:0;
-    right:0;
+    top:-1px;
+    right:-1px;
     width:5%;
     height:5%;
     border-top: 3px solid #3DF8F8;
@@ -304,8 +324,8 @@ a{
 }
 .left-bottom_corner{
     position:absolute;
-    bottom:0;
-    left:0;
+    bottom:-1px;
+    left:-1px;
     width:5%;
     height:5%;
     border-bottom: 3px solid #3DF8F8;
@@ -313,8 +333,8 @@ a{
 }
 .right-bottom_corner{
     position:absolute;
-    bottom:0;
-    right:0;
+    bottom:-1px;
+    right:-1px;
     width:5%;
     height:5%;
     border-bottom: 3px solid #3DF8F8;
@@ -379,13 +399,14 @@ a{
     }
 }
 .ctext,.ctext2{
+    font-size:60px;
     color:#ffffff;
     position:absolute;
     top:230px;
     left:46%;
     transform:translate(-50%);
     text-align:center;
-    font-family:'LSf', monospace;
+    font-family:'fault-text', monospace;
     text-shadow:0 0 0px #3DF8F8;
 }
 .ctext2{
@@ -395,7 +416,7 @@ a{
 }
 .ctext::after,.ctext::before,.ctext2::after,.ctext2::before{
     content:"_LS_";
-    font-family:'LSf', monospace;
+    font-family:'fault-text', monospace;
     position:absolute;
     left:0;
     top:0;
@@ -417,4 +438,39 @@ canvas#c{
     width:4%;
     display:block;
     pointer-events:none;
+}
+.icon-inline{
+    display:inline-block;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+.icon-timeline{
+    -webkit-mask: url('_icons/timeline.svg') center / contain no-repeat;
+    mask: url('_icons/timeline.svg') center / contain no-repeat; 
+}
+.icon-home{
+    -webkit-mask: url('_icons/home.svg') center / contain no-repeat;
+    mask: url('_icons/home.svg') center / contain no-repeat; 
+}
+.icon-code{
+    -webkit-mask: url('_icons/code.svg') center / contain no-repeat;
+    mask: url('_icons/code.svg') center / contain no-repeat; 
+}
+.icon-article{
+    -webkit-mask: url('_icons/article.svg') center / contain no-repeat;
+    mask: url('_icons/article.svg') center / contain no-repeat; 
+}
+.icon-people{
+    -webkit-mask: url('_icons/people.svg') center / contain no-repeat;
+    mask: url('_icons/people.svg') center / contain no-repeat; 
+}
+.icon-cyan{
+    background-color: #3DF8F8;
+}
+.icon-white{
+    background-color: #D0F0FF;
+}
+.icon-pink{
+    background-color: #e23afb;
 }

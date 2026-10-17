@@ -1,6 +1,6 @@
 @font-face{
     font-family:'LSfont';
-    src:url('ANAKRON.ttf') format('opentype');
+    src:url('_fonts/ANAKRON.ttf') format('opentype');
     font-weight:normal;
     font-style:normal;
     font-display:swap;
@@ -176,34 +176,11 @@ body{
 .logo-vis{
     opacity:1;
 }
-.ctext,.ctext2{
-    color:#ffffff;
-    position:absolute;
-    top:230px;
-    left:46%;
-    transform:translate(-50%);
-    text-align:center;
-    font-family:'LSf', monospace;
-    text-shadow:0 0 0px #3DF8F8;
-}
-.ctext2{
-    top:230px;
-    left:50%;
-    transform:translate(-50%);
-}
-.ctext::after,.ctext::before,.ctext2::after,.ctext2::before{
-    content:"_LS_";
-    font-family:'LSf', monospace;
-    position:absolute;
-    left:0;
-    top:0;
-    mix-blend-mode: screen;
-}
-.ctext::after,.ctext2::after{
-    color:#ff0000;
-    transform: translateX(5px);
-}
-.ctext::before,.ctext2::before{
-    color:#0000ff;
-    transform: translateX(-5px);
+.skip-btn{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    color:#4bff5e;
+    text-decoration:none;
+    z-index: 20;
 }
