@@ -1,2 +1,2 @@
 # diqiulaoshi.github.io
-LS-side
+LS-site
